@@ -4,6 +4,9 @@ using static UnityEditor.Searcher.SearcherWindow.Alignment;
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D rb2d;
+
+    //AddF
+    Vector2 moveInput;
     //walk 
     float move;
     [SerializeField] float speed;
@@ -19,9 +22,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        move = Input.GetAxis("Horizontal"); //เป็นชุดคีย์ ไปดูในอีดิทโปรเจคเซ็ตติ้ง
-
-        rb2d.linearVelocity = new Vector2(move * speed, rb2d.linearVelocity.y);
+        //move = Input.GetAxis("Horizontal"); //เป็นชุดคีย์ ไปดูในอีดิทโปรเจคเซ็ตติ้ง
+        //rb2d.linearVelocity = new Vector2(move * speed, rb2d.linearVelocity.y);
+        //New
+        moveInput = new Vector2 (Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        rb2d.AddForce (moveInput*speed);
 
         if (Input.GetButtonDown("Jump") && !isjumping)
         {
